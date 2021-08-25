@@ -17,7 +17,7 @@ of your `composer.json` file.
 
 ## Latest Release
 
-The latest version of the module is v0.5.0 `BETA`.
+The latest version of the module is v1.0.2.
 
 ## Usage
 

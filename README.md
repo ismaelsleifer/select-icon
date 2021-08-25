@@ -29,7 +29,7 @@ View:
 use sleifer\autocompleteAjax\SelectIcon;
 
 // Normal select with ActiveForm & model
-<?= $form->field($model, 'user_id')->widget(SelectIcon::classname(), []) ?>
+<?= $form->field($model, 'user_id')->widget(SelectIcon::class, []) ?>
 ```
 
 

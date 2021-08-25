@@ -24,14 +24,26 @@ class SelectIcon extends InputWidget
 
     public function run()
     {
+        $name = Html::getInputName($this->model, $this->attribute);
         $id = BaseHtml::getInputId($this->model, $this->attribute);
-        $id = str_replace('-', '_', $id);
-        
         $value = $this->model->{$this->attribute};
+        
         $this->registerActiveAssets();
 
         $this->getView()->registerJs("
             
+                $('#{$id}').autocomplete({
+                         source: source,
+                         select: function(event, ui) {
+                             $('#{$id}-i').attr('class', ui.item.value);
+                         },
+                     })
+                     .data('ui-autocomplete')
+                     ._renderItem = function(ul, item) {
+                         return $('<li>')
+                             .append('<a>' + '<i class=\'' + item.value + '\'></i> - ' + item.label + '</a>')
+                             .appendTo(ul);
+                };
             
         ");
         
@@ -39,8 +51,15 @@ class SelectIcon extends InputWidget
             $this->options['class'] = 'form-control';
         }
         
-        return 
-            Html::activeHiddenInput($this->model, $this->attribute,  array_merge($this->hidden_options, ['id' => $id . '-hidden']))
-          . Html::textInput($id . '_text', $value && !$this->startQuery ? $value : '', array_merge($this->options, ['id' => $id]));
+        $html = 
+            '<div class="input-group">' .
+               '<div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="'. $value .'" id="'. $id .'-i"></i>
+                    </span>
+                </div>'.
+                Html::textInput($name, $value, $this->options).
+            '</div>';
+         return $html;
     }
 }

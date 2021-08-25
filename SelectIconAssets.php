@@ -12,14 +12,10 @@ class SelectIconAssets extends AssetBundle
 	public $sourcePath = '@sleifer/selectIcon/assets';
 
 	public $js = [
+		'js/icons.js'
 	];
 
-	// public $depends = [
-	// 	'yii\web\JqueryAsset',
-    //     'yii\jui\JuiAsset'
-	// ];
-
-	// public $css = [
-	// 	'css/yii2-autocomplete-ajax.css',
-	// ];
+	public $depends = [
+		'yii\web\JqueryAsset',
+	];
 }
